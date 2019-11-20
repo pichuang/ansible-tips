@@ -1,0 +1,27 @@
+---
+- name: Ping until reachable
+  hosts:
+    - remote
+
+  gather_facts: false
+
+  tasks:
+  - name: Show {{ inventory_hostname }} uptime
+    command: "uptime"
+    register: result
+
+  - debug:
+      msg: "System {{ inventory_hostname }} already run {{ result.stdout }}"
+
+  - name: Reboot {{ inventory_hostname }}
+    reboot:
+      reboot_timeout: 100
+      msg: "Reboot initiated by Ansible"
+      test_command: "whoami"
+
+  - name: Show {{ inventory_hostname }} uptime
+    command: "uptime"
+    register: result
+
+  - debug:
+      msg: "System {{ inventory_hostname }} already run {{ result.stdout }}"
