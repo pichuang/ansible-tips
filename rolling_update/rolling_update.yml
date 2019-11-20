@@ -1,0 +1,13 @@
+---
+- name: Rolling update or process
+  hosts:
+    - rhel8
+    - rhel7
+
+  serial: 1
+
+  gather_facts: false
+
+  tasks:
+  - name: "Rolling get {{ inventory_hostname }} facts"
+    setup:
