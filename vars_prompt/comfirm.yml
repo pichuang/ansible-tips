@@ -1,0 +1,29 @@
+---
+- name: Confirm whether user really meant to install the packags
+  hosts:
+    - localhost
+
+  gather_facts: false
+
+  vars_prompt:
+    - name: install_podman
+      prompt: >
+        "Do you want to install podman? [no/yes]"
+      default: 'no'
+      private: no
+
+  tasks:
+  - name: exit playbook, if user did mean to purge cluster
+    fail:
+      msg: >
+        "Existing the playbook, the system will NOT install
+         podman. To install podman, either say 'yes' on  the prompt
+         or use `-e install_podman=yes` on the command line when invoking
+         the playbook"
+    when: install_podman != 'yes'
+
+  - name: Install podman
+    debug:
+      msg:
+        - "Install podman! install podman"
+        - "Run!"
