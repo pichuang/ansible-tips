@@ -1,0 +1,12 @@
+---
+- name: No Log
+  hosts:
+    - remote
+
+  gather_facts: false
+
+  tasks:
+  - name: Show {{ inventory_hostname }} uptime
+    command: "uptime"
+    no_log: True
+
