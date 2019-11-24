@@ -2,5 +2,5 @@
 
 - [x] Var Prompt
 - [x] Rolling Update
-- [ ] No log
+- [x] No log
 - [ ] Reboot
