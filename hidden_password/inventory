@@ -1,0 +1,15 @@
+[rhel:children]
+rhel7
+rhel8
+
+[rhel:vars]
+ansible_ssh_user=root
+ansible_ssh_connection=ssh
+ansible_ssh_pass="{{ lookup('file', '/root/ssh_password', errors='warn') }}"
+public_key="{{ lookup('file', '/root/.ssh/id_rsa', errors='warn') }}"
+
+[rhel7]
+tower.pichuang.local ansible_host=192.168.77.21
+
+[rhel8]
+rhel8.pichuang.local ansible_host=192.168.77.22
